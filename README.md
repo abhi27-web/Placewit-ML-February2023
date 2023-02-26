@@ -1,6 +1,6 @@
 # Placewit-ML-February2023
 
-### CLASS 1 : 26 February 2023
+## CLASS 1 : 26 February 2023
 
 #### Session 1
 - Introduction to Python Programming
