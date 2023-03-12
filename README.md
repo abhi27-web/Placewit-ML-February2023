@@ -26,5 +26,24 @@
 - Piechart
 
 #### Session 2
+- Working on Complex EDA	
+- Multiple attribute graphs
+	Titanic EDA Answers
+
+## CLASS 3 : 12 March 2023
+
+#### Session 1
+- Introduction to Machine Learning	
+- Machine Learning:History and Origin
+- Supervised and Unsupervised Algorithms
+- Clustering
+- Classification and Regression
+
+#### Session 2
+- Linear Regression	
+- Introduction to Linear Regression
+- Gradient Descent
+- Cost Function
+- Linear Regression Algorithm from Scratch
 
 
