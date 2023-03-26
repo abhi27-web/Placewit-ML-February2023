@@ -67,4 +67,5 @@
 - Logistic Regression
 
 #### Session 2
+- Logistic Regression code from Scratch
 - Application of Logistic Regression
