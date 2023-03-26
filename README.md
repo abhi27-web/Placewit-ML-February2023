@@ -46,4 +46,25 @@
 - Cost Function
 - Linear Regression Algorithm from Scratch
 
+## CLASS 4 : 19 March 2023
 
+#### Session 1
+- Regression Metrics
+- RMSE
+- MSE
+- MAE
+- Confusion Matrix
+- Sklearn Linear regression 
+
+#### Session 2
+- Dataset Preprocessing
+- Dealing with categorical Variables
+- Applying LR on House Price data
+
+## CLASS 5 : 26 March 2023
+
+#### Session 1
+- Logistic Regression
+
+#### Session 2
+- Application of Logistic Regression
