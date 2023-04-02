@@ -77,3 +77,4 @@
 
 #### Session 2
 - Decision tree using sklearn application
+- Grid Search Hyperparameter Tuning
