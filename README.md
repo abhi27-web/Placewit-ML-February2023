@@ -69,3 +69,11 @@
 #### Session 2
 - Logistic Regression code from Scratch
 - Application of Logistic Regression
+
+## CLASS 6 : 4 April 2023
+
+#### Session 1
+- Decision Tree from Scratch
+
+#### Session 2
+- Decision tree using sklearn application
