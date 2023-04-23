@@ -82,9 +82,30 @@
 ## CLASS 7 : 9 April 2023
 
 #### Session 1
-- Decision Tree from Scratch
-- Decision Tree using Sklearn
+- Random Forest from Scratch
+- Random Forest using Sklearn
 
 #### Session 2
-- Decision Tree Application
-- Grid Search Hyperparameter Tuning
+- Random Forest Application
+- KNN from Scratch + Application
+
+## CLASS 8 : 16 April 2023
+
+#### Session 1
+- Working on Text Data
+- Data Cleaning
+
+#### Session 2
+- Data Vectorization
+- Application on a dataset
+
+## CLASS 9 : 23 April 2023
+
+#### Session 1
+- Basics of NN
+- Transfer Learning
+- How does NN work
+
+#### Session 2
+- Basic idea behind Backpropogation
+- Coding a basic NN
