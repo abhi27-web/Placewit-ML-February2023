@@ -109,3 +109,8 @@
 #### Session 2
 - Basic idea behind Backpropogation
 - Coding a basic NN
+
+## CLASS 10 : 5 May 2023
+
+#### Session 1
+- Backpropogation: Optimizing 3 values simultaneously
