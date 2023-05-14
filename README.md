@@ -110,7 +110,7 @@
 - Basic idea behind Backpropogation
 - Coding a basic NN
 
-## CLASS 10 : 5 May 2023
+## CLASS 10 : 12 May 2023 and 14 May 2023
 
 #### Session 1
 - Backpropogation: Optimizing 3 values simultaneously
@@ -119,3 +119,8 @@
 #### Session 2
 - NN Part 3: ReLU
 - NN Part 4: Multiple Inputs and Outputs
+
+## CLASS 11 : 14 May 2023
+
+#### Session 1
+- RNN
