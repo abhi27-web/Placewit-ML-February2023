@@ -114,3 +114,8 @@
 
 #### Session 1
 - Backpropogation: Optimizing 3 values simultaneously
+- Optimizing all the Values Simultaneously
+
+#### Session 2
+- NN Part 3: ReLU
+- NN Part 4: Multiple Inputs and Outputs
