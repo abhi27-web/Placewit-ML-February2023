@@ -124,3 +124,55 @@
 
 #### Session 1
 - RNN
+
+
+```yaml
+data_config:
+  source:
+    type: "hf"
+    repo_id: "datasets-examples/doc-audio-1"
+    split: "train"
+    streaming: true
+
+  sink:
+    type: "hf"
+    repo_id: <repo_name>
+    config_name: MM-doc-audio-1
+    split: train
+    push_to_hub: true
+    private: true
+    token: <hf_token>
+
+graph_config:
+  nodes:
+    identify_animal:
+      output_keys: animal
+      node_type: llm
+      prompt:
+        - user:
+            - type: text
+              text: |
+                Identify the animal in the provided audio.
+            - type: audio_url
+              audio_url: "{audio}"
+
+      model:
+        name: qwen_2_audio_7b
+        parameters:
+          max_tokens: 1000
+          temperature: 0.3
+  edges:
+    - from: START
+      to: identify_animal
+    - from: identify_animal
+      to: END
+
+output_config:
+    output_map:
+        id:
+          from: "id"
+        audio:
+          from: "audio"
+        animal:
+          from: "animal"
+```
