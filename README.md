@@ -1,56 +1,48 @@
 ```yaml
 data_config:
   source:
-    type: "disk"
-    file_path: "data/code_tasks.jsonl"
-    file_format: "jsonl"
+    type: "hf"
+    repo_id: "google-research-datasets/mbpp"
+    config_name: "sanitized"
+    split: ["train"]
+    transformations:
+      - transform: processors.data_transform.RenameFieldsTransform
+        params:
+          mapping:
+            task_id: id
+            overwrite: false
   sink:
     type: "jsonl"
-    file_path: "output/validated_output.jsonl"
+    file_path: "output/mbpp_converted.jsonl"
 
 graph_config:
   nodes:
     generate:
-      node_type: llm
-      output_keys: solution
+      node_type: agent
+      output_keys: agent_response
       prompt:
-        - system: "You are an AI that solves code problems."
-        - user: "{task}"
+        - system: You are an AI programming tutor.
+        - user: {prompt}
       model:
-        name: mistral
+        name: gpt-4
         parameters:
-          temperature: 0.5
-    validate:
-      node_type: lambda
-      lambda: validators.code.check_validity
-      output_keys: 
-        - is_valid
+          temperature: 0.7
   edges:
     - from: START
       to: generate
     - from: generate
-      to: validate
-    - from: validate
-      condition: validators.code.RouteBasedOnValidity
-      path_map:
-        END: END
-        generate: generate
+      to: END
 
 output_config:
+  generator: tasks.mbpp.code_generation_with_graph_builder.task_executor.CodeGenOutputGenerator
   output_map:
     id:
-      from: task_id
-    solution:
-      from: solution
-    validity:
-      from: is_valid
-
-schema_config:
-  fields:
-    - name: id
-      type: int
-    - name: solution
-      type: str
-    - name: validity
-      type: bool
+      from: id
+    conversation:
+      from: agent_response
+      transform: build_conversation
+    tags:
+      value: ["mbpp", "codegen"]
+    language:
+      value: "en"
 ```
