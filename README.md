@@ -1,32 +1,21 @@
 ```yaml
 data_config:
-  source:
-    type: "hf"
-    repo_id: "google-research-datasets/mbpp"
-    config_name: "sanitized"
-    split: ["train"]
-    transformations:
-      - transform: processors.data_transform.RenameFieldsTransform
-        params:
-          mapping:
-            task_id: id
-            overwrite: false
   sink:
-    type: "jsonl"
-    file_path: "output/mbpp_converted.jsonl"
+    type: "json"
+    file_path: "output/synthetic_data.jsonl"
 
 graph_config:
   nodes:
-    generate:
-      node_type: agent
-      output_keys: agent_response
-      prompt:
-        - system: You are an AI programming tutor.
-        - user: {prompt}
-      model:
-        name: gpt-4
-        parameters:
-          temperature: 0.7
+      generate:
+        node_type: llm
+        output_keys: response
+        prompt:
+          - system: "You are a helpful assistant."
+          - user: "Write a fun fact about space."
+        model:
+          name: gpt-3.5-turbo
+          parameters:
+            temperature: 0.8
   edges:
     - from: START
       to: generate
@@ -34,15 +23,7 @@ graph_config:
       to: END
 
 output_config:
-  generator: tasks.mbpp.code_generation_with_graph_builder.task_executor.CodeGenOutputGenerator
   output_map:
-    id:
-      from: id
-    conversation:
-      from: agent_response
-      transform: build_conversation
-    tags:
-      value: ["mbpp", "codegen"]
-    language:
-      value: "en"
+  fact:
+    from: response
 ```
