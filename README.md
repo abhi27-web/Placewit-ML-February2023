@@ -129,50 +129,56 @@
 ```yaml
 data_config:
   source:
-    type: "hf"
-    repo_id: "datasets-examples/doc-image-1"
-    split: "train"
-    streaming: true
-
+    type: "disk"
+    file_path: "data/code_tasks.jsonl"
+    file_format: "jsonl"
   sink:
-    type: "hf"
-    repo_id: <repo_name>
-    config_name: MM-doc-image-1
-    split: train
-    push_to_hub: true
-    private: true
-    token: <hf_token>
+    type: "jsonl"
+    file_path: "output/validated_output.jsonl"
 
 graph_config:
   nodes:
-    judge_pokemon:
-      output_keys: pokemon
+    generate:
       node_type: llm
+      output_keys: solution
       prompt:
-        - user:
-            - type: text
-              text: |
-                Identify the pokemon in the provided image.
-            - type: image_url
-              image_url: "{image}"
-
+        - system: "You are an AI that solves code problems."
+        - user: "{task}"
       model:
-        name: gpt-4o
+        name: mistral
         parameters:
-          max_tokens: 1000
-          temperature: 0.3
+          temperature: 0.5
+    validate:
+      node_type: lambda
+      lambda: validators.code.check_validity
+      output_keys: 
+        - is_valid
   edges:
     - from: START
-      to: judge_pokemon
-    - from: judge_pokemon
-      to: END
+      to: generate
+    - from: generate
+      to: validate
+    - from: validate
+      condition: validators.code.RouteBasedOnValidity
+      path_map:
+        END: END
+        generate: generate
 
 output_config:
-    output_map:
-        id:
-          from: "id"
-        image:
-          from: "image"
-        pokemon:
-          from: "pokemon"
+  output_map:
+    id:
+      from: task_id
+    solution:
+      from: solution
+    validity:
+      from: is_valid
+
+schema_config:
+  fields:
+    - name: id
+      type: int
+    - name: solution
+      type: str
+    - name: validity
+      type: bool
 ```
